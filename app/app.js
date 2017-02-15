@@ -19,4 +19,7 @@
 // import './proxyWithESProxy'
 
 // subscribe/pulish(observe)
-import './subscribePulish'
+// import './subscribePulish'
+
+// command
+import './command'
