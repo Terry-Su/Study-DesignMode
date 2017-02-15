@@ -21,5 +21,14 @@
 // subscribe/pulish(observe)
 // import './subscribePulish'
 
-// command
-import './command'
+// command (macro command)
+// import './commandWithMacroCommand'
+
+// command (normal)
+// import './commandWithNormal'
+
+// composition
+// import './composition'
+
+// template method
+// import './templateMethod'

@@ -3314,9 +3314,41 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
+// View module by cancel annotating target module and annotating other modules
 
+// singleton(with closure)
+// import './singletonWithClosure'
 
-__webpack_require__(116);
+// singleton(with class)
+// import './singletonWithClass/index.js'
+
+// strategy
+// import './strategy'
+
+// iterator(traditional)
+// import './iteratorWithTradition'
+
+// iterator(with ECMAScript Iterator)
+// import './iteratorWithESIterator'
+
+// proxy(with ECMAScript Proxy)
+// import './proxyWithESProxy'
+
+// subscribe/pulish(observe)
+// import './subscribePulish'
+
+// command (macro command)
+// import './commandWithMacroCommand'
+
+// command (normal)
+// import './commandWithNormal'
+
+// composition
+// import './composition'
+
+// template method
+// import './templateMethod'
+
 
 /***/ }),
 /* 115 */
@@ -3354,95 +3386,8 @@ define(String.prototype, "padRight", "".padEnd);
 /* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(113)))
 
 /***/ }),
-/* 116 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-__webpack_require__(117);
-
-/***/ }),
-/* 117 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
-// realize the basic function of caculator
-
-
-var addCommand = function addCommand(value, receiver) {
-	return {
-		excute: function excute() {
-			receiver.value = receiver.value + value;
-		},
-		undo: function undo() {
-			receiver.value = receiver.value - value;
-		},
-		redo: function redo() {
-			receiver.value = receiver.value + value;
-		}
-	};
-};
-
-var subCommand = function subCommand(value, receiver) {
-	return {
-		excute: function excute() {
-			receiver.value = receiver.value - value;
-		},
-		undo: function undo() {
-			receiver.value = receiver.value + value;
-		},
-		redo: function redo() {
-			receiver.value = receiver.value - value;
-		}
-	};
-};
-
-var Caculator = {
-	value: 0,
-	commands: new Set(),
-	add: function add(value) {
-		addCommand(value, this).excute();
-		this.commands.add({
-			command: addCommand,
-			value: value
-		});
-
-		console.log(this.value);
-	},
-	sub: function sub(value) {
-		subCommand(value, this).excute();
-		this.commands.add({
-			command: subCommand,
-			value: value
-		});
-
-		console.log(this.value);
-	},
-	undo: function undo() {
-		var commandObj = [].concat(_toConsumableArray(this.commands)).pop();
-		var command = commandObj.command,
-		    value = commandObj.value;
-
-		command(value, this).undo();
-
-		this.commands.delete(commandObj);
-
-		console.log(this.value);
-	}
-};
-
-Caculator.add(10); // 10
-
-Caculator.sub(5); // 5
-
-Caculator.undo(); // 10
-
-/***/ }),
+/* 116 */,
+/* 117 */,
 /* 118 */
 /***/ (function(module, exports, __webpack_require__) {
 
