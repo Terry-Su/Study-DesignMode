@@ -3314,41 +3314,9 @@ module.exports = g;
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-// View module by cancel annotating target module and annotating other modules
 
-// singleton(with closure)
-// import './singletonWithClosure'
 
-// singleton(with class)
-// import './singletonWithClass/index.js'
-
-// strategy
-// import './strategy'
-
-// iterator(traditional)
-// import './iteratorWithTradition'
-
-// iterator(with ECMAScript Iterator)
-// import './iteratorWithESIterator'
-
-// proxy(with ECMAScript Proxy)
-// import './proxyWithESProxy'
-
-// subscribe/pulish(observe)
-// import './subscribePulish'
-
-// command (macro command)
-// import './commandWithMacroCommand'
-
-// command (normal)
-// import './commandWithNormal'
-
-// composition
-// import './composition'
-
-// template method
-// import './templateMethod'
-
+__webpack_require__(307);
 
 /***/ }),
 /* 115 */
@@ -8366,6 +8334,94 @@ process.umask = function() { return 0; };
 __webpack_require__(115);
 module.exports = __webpack_require__(114);
 
+
+/***/ }),
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+// add plenty of books
+
+
+// create share object
+var Book = function Book(title, author, genre, pageCount, publisherID, ISBN) {
+  this.title = title;
+  this.author = author;
+  this.genre = genre;
+  this.pageCount = pageCount;
+  this.publisherID = publisherID;
+  this.ISBN = ISBN;
+};
+
+// Book Factory singleton
+var BookFactory = function () {
+  var existingBooks = {},
+      existingBook;
+
+  return {
+    createBook: function createBook(title, author, genre, pageCount, publisherID, ISBN) {
+
+      // Find out if a particular book meta-data combination has been created before
+      // !! or (bang bang) forces a boolean to be returned
+      existingBook = existingBooks[ISBN];
+      if (!!existingBook) {
+        return existingBook;
+      } else {
+
+        // if not, let's create a new instance of the book and store it
+        var book = new Book(title, author, genre, pageCount, publisherID, ISBN);
+        existingBooks[ISBN] = book;
+        return book;
+      }
+    }
+  };
+}();
+
+// BookRecordManager singleton
+var BookRecordManager = function () {
+
+  var bookRecordDatabase = {};
+
+  return {
+    // add a new book into the library system
+    addBookRecord: function addBookRecord(id, title, author, genre, pageCount, publisherID, ISBN, checkoutDate, checkoutMember, dueReturnDate, availability) {
+
+      var book = bookFactory.createBook(title, author, genre, pageCount, publisherID, ISBN);
+
+      bookRecordDatabase[id] = {
+        checkoutMember: checkoutMember,
+        checkoutDate: checkoutDate,
+        dueReturnDate: dueReturnDate,
+        availability: availability,
+        book: book
+      };
+    },
+    updateCheckoutStatus: function updateCheckoutStatus(bookID, newStatus, checkoutDate, checkoutMember, newReturnDate) {
+
+      var record = bookRecordDatabase[bookID];
+      record.availability = newStatus;
+      record.checkoutDate = checkoutDate;
+      record.checkoutMember = checkoutMember;
+      record.dueReturnDate = newReturnDate;
+    },
+
+    extendCheckoutPeriod: function extendCheckoutPeriod(bookID, newReturnDate) {
+      bookRecordDatabase[bookID].dueReturnDate = newReturnDate;
+    },
+
+    isPastDue: function isPastDue(bookID) {
+      var currentDate = new Date();
+      return currentDate.getTime() > Date.parse(bookRecordDatabase[bookID].dueReturnDate);
+    }
+  };
+}();
 
 /***/ })
 /******/ ]);
