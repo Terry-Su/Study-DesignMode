@@ -53,4 +53,10 @@
 // import './chainOfResponsibility'
 
 // mediator
-import './mediator'
+// import './mediator'
+
+// decorator
+// import './decorator'
+
+// state
+import './state'

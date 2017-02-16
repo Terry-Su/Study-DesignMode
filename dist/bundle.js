@@ -3316,7 +3316,7 @@ module.exports = g;
 "use strict";
 
 
-__webpack_require__(!(function webpackMissingModule() { var e = new Error("Cannot find module \"./mediator\""); e.code = 'MODULE_NOT_FOUND';; throw e; }()));
+__webpack_require__(303);
 
 /***/ }),
 /* 115 */
@@ -8333,6 +8333,81 @@ process.umask = function() { return 0; };
 __webpack_require__(115);
 module.exports = __webpack_require__(114);
 
+
+/***/ }),
+/* 301 */,
+/* 302 */,
+/* 303 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+// mock a trafficLight 
+
+
+var TrafficLight = function () {
+    function TrafficLight() {
+        _classCallCheck(this, TrafficLight);
+
+        this.state = {
+            color: ''
+        };
+        this.stateProxy = new Proxy(this.state, {
+            set: function set(target, prop, value, receiver) {
+                if (prop !== 'color') {
+                    return true;
+                }
+
+                var oldColor = target.color;
+                var newColor = value;
+                var isNewColor = newColor != oldColor;
+
+                if (isNewColor) {
+                    switch (newColor) {
+                        case 'red':
+                            console.log('it\'s red now');
+                            setTimeout(function () {
+                                trafficLight.stateProxy.color = 'green';
+                            }, 2000);
+                            break;
+                        case 'orange':
+                            console.log('it\'s orange now');
+                            setTimeout(function () {
+                                trafficLight.stateProxy.color = 'red';
+                            }, 200);
+                            break;
+                        case 'green':
+                            console.log('it\'s green now');
+                            setTimeout(function () {
+                                trafficLight.stateProxy.color = 'orange';
+                            }, 2000);
+                            break;
+                    }
+                }
+
+                return Reflect.set(target, prop, value, receiver);
+            }
+        });
+    }
+
+    _createClass(TrafficLight, [{
+        key: 'start',
+        value: function start() {
+            this.stateProxy.color = 'red';
+        }
+    }]);
+
+    return TrafficLight;
+}();
+
+var trafficLight = new TrafficLight();
+
+trafficLight.start();
 
 /***/ })
 /******/ ]);
