@@ -1,7 +1,7 @@
 // View module by cancel annotating target module and annotating other modules
 
 // singleton(with closure)
-// import './singletonWithClosure'
+import './singletonWithClosure'
 
 // singleton(with class)
 // import './singletonWithClass/index.js'
@@ -71,4 +71,4 @@
 // import './factoryWithNormal'
 
 // facade (nothing, just think about jQuery)
-import './facade'
+// import './facade'

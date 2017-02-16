@@ -3316,7 +3316,7 @@ module.exports = g;
 "use strict";
 
 
-__webpack_require__(300);
+__webpack_require__(301);
 
 /***/ }),
 /* 115 */
@@ -8334,12 +8334,31 @@ module.exports = __webpack_require__(114);
 
 
 /***/ }),
-/* 300 */
+/* 300 */,
+/* 301 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-// nothing, just think about jQuery
 
+
+var singletonTester = function () {
+	var instance = null;
+	return function (name) {
+		if (!instance) {
+			instance = this;
+		}
+
+		this.name = name;
+
+		return instance;
+	};
+}();
+
+var singletonTester1 = new singletonTester('singletonTester1');
+console.log(singletonTester1.name);
+
+var singletonTester2 = new singletonTester('singletonTester2');
+console.log(singletonTester2.name);
 
 /***/ })
 /******/ ]);
