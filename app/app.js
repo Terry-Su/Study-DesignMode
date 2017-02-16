@@ -53,4 +53,4 @@
 // import './chainOfResponsibility'
 
 // mediator
-
+import './mediator'
