@@ -1,4 +1,4 @@
-// sync the function of two interface
+// crate an adapted interface as same as idealInterface
 
 
 const idealInterface = {

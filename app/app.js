@@ -62,4 +62,13 @@
 // import './state'
 
 // adapter
-import './adapter'
+// import './adapter'
+
+// factory (simple)
+// import './factoryWithSimple'
+
+// factory (normal)
+// import './factoryWithNormal'
+
+// facade (nothing, just think about jQuery)
+import './facade'
