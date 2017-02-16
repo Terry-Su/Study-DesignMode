@@ -47,4 +47,10 @@
 // import './templateMethodWithJSFunction'
 
 // flyweigth (no result, just show method)
-import './flyweight'
+// import './flyweight'
+
+// chain of Responsibility
+// import './chainOfResponsibility'
+
+// mediator
+
