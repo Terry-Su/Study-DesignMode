@@ -3316,7 +3316,7 @@ module.exports = g;
 "use strict";
 
 
-__webpack_require__(303);
+__webpack_require__(304);
 
 /***/ }),
 /* 115 */
@@ -8337,77 +8337,40 @@ module.exports = __webpack_require__(114);
 /***/ }),
 /* 301 */,
 /* 302 */,
-/* 303 */
+/* 303 */,
+/* 304 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+var _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; };
 
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-// mock a trafficLight 
+// sync the function of two interface
 
 
-var TrafficLight = function () {
-    function TrafficLight() {
-        _classCallCheck(this, TrafficLight);
+var idealInterface = {
+	data: {
+		name: 'peter',
+		age: '20'
+	}
+};
 
-        this.state = {
-            color: ''
-        };
-        this.stateProxy = new Proxy(this.state, {
-            set: function set(target, prop, value, receiver) {
-                if (prop !== 'color') {
-                    return true;
-                }
+var currentInterface = {
+	name: 'peter',
+	age: '20'
+};
 
-                var oldColor = target.color;
-                var newColor = value;
-                var isNewColor = newColor != oldColor;
+var interfaceAdapter = function interfaceAdapter(theInterface) {
+	return {
+		data: _extends({}, theInterface)
+	};
+};
 
-                if (isNewColor) {
-                    switch (newColor) {
-                        case 'red':
-                            console.log('it\'s red now');
-                            setTimeout(function () {
-                                trafficLight.stateProxy.color = 'green';
-                            }, 2000);
-                            break;
-                        case 'orange':
-                            console.log('it\'s orange now');
-                            setTimeout(function () {
-                                trafficLight.stateProxy.color = 'red';
-                            }, 200);
-                            break;
-                        case 'green':
-                            console.log('it\'s green now');
-                            setTimeout(function () {
-                                trafficLight.stateProxy.color = 'orange';
-                            }, 2000);
-                            break;
-                    }
-                }
+// create new interface
+var adaptedInterface = interfaceAdapter(currentInterface);
 
-                return Reflect.set(target, prop, value, receiver);
-            }
-        });
-    }
-
-    _createClass(TrafficLight, [{
-        key: 'start',
-        value: function start() {
-            this.stateProxy.color = 'red';
-        }
-    }]);
-
-    return TrafficLight;
-}();
-
-var trafficLight = new TrafficLight();
-
-trafficLight.start();
+console.log(JSON.stringify(idealInterface) === JSON.stringify(adaptedInterface)); // true
 
 /***/ })
 /******/ ]);
